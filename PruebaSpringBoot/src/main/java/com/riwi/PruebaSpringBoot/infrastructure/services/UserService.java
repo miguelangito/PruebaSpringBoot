@@ -51,7 +51,7 @@ public class UserService implements IUserService{
 
         if (page <0) page = 0;
 
-        PageRequest pagination = null;
+        PageRequest pagination = PageRequest.of(page, size);
 
         return this.userRepository.findAll(pagination).map(this::entityToResponse);
 
