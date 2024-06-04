@@ -2,6 +2,8 @@ package com.riwi.PruebaSpringBoot.domain.entities;
 
 import java.util.List;
 
+import com.riwi.PruebaSpringBoot.util.enums.QuestionType;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,8 +37,8 @@ public class Question {
     @Column(nullable = false)
     private String text;
 
-    @Column(length = 50, nullable = false)
-    private String type;
+    @Column(nullable = false)
+    private QuestionType type;
     
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
