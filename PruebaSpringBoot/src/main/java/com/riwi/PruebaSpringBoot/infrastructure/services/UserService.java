@@ -1,5 +1,7 @@
 package com.riwi.PruebaSpringBoot.infrastructure.services;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +12,7 @@ import com.riwi.PruebaSpringBoot.api.dto.response.UserResponse;
 import com.riwi.PruebaSpringBoot.domain.entities.User;
 import com.riwi.PruebaSpringBoot.domain.repositories.UserRepository;
 import com.riwi.PruebaSpringBoot.infrastructure.abstract_services.IUserService;
+import com.riwi.PruebaSpringBoot.infrastructure.helpers.EmailHelper;
 
 import lombok.AllArgsConstructor;
 
@@ -20,9 +23,17 @@ public class UserService implements IUserService{
     @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
+    private final EmailHelper emailHelper;
+
     @Override
     public UserResponse create(UserRequest request) {
         User user = this.requestToEntity(request);
+
+        if (Objects.nonNull(user.getEmail())) {
+            this.emailHelper.sendMail(user.getEmail(), user.getName());
+        }
+
         return this.entityToResponse(this.userRepository.save(user));
     }
 
