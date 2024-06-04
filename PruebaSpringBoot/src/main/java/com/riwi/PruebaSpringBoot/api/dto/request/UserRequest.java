@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserRequest {
     
+    private Long id;
+
     @NotBlank(message = "Name must not be null")
     @Size(max = 100,message = "Name must no be more than 100 characters")
     private String name;

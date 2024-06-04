@@ -28,7 +28,8 @@ public class UserService implements IUserService{
 
     @Override
     public UserResponse get(Long id) {
-        return this.entityToResponse(this.find(id));
+        User user = this.find(id);
+        return this.entityToResponse(user);
     }
 
     @Override
@@ -75,6 +76,7 @@ public class UserService implements IUserService{
     private User requestToEntity(UserRequest entity){
 
         return User.builder()
+                .id(entity.getId())
                 .name(entity.getName())
                 .email(entity.getEmail())
                 .password(entity.getPassword())
