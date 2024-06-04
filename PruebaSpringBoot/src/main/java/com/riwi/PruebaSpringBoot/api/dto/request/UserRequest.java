@@ -23,7 +23,6 @@ public class UserRequest {
 
     @NotBlank(message = "Password must not be null")
     private String password;
-    
-    @NotBlank(message = "Status must not be null")
+
     private boolean active;
 }
